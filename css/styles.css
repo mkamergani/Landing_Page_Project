@@ -87,6 +87,11 @@ section {
     color: #fff;
     transition: ease 0.3s all;
 }
+.navbar__menu .menu__link .active {
+    background: rgb(49, 47, 173);
+    color: #fff;
+    
+}
 
 /* Header Styles */
 .page__header {
