@@ -18,7 +18,7 @@
  * 
 */
 const sections = document.querySelectorAll("section");
-
+const navList = document.querySelector("#navbar__list");
 
 /**
  * End Global Variables
@@ -39,11 +39,10 @@ const fragment = document.createDocumentFragment();
 
 for (i=0;i<sections.length;i++)
 {
-    var item = document.createElement("li");
-    var link = document.createElement("a");
+    const item = document.createElement("li");
+    const link = document.createElement("a");
     text =sections[i].dataset.nav;
-    link.textContent=text
-    link.href="#"+sections[i].id;
+    link.textContent=text;
     link.id=sections[i].id+"link"
     link.dataset.secName = sections[i].id;
     link.classList.add("menu__link");
@@ -51,7 +50,7 @@ for (i=0;i<sections.length;i++)
     
     fragment.appendChild(item);
 }
-const navList = document.querySelector("#navbar__list");
+
 navList.appendChild(fragment);
 
 
@@ -64,11 +63,20 @@ links=document.querySelectorAll(".menu__link")
 *  and ADD Active state to it and it's navigation Link
 */
 function changeActiveSection (){
-    var section1 = document.getElementById("section1")
+    const section1 = document.getElementById("section1")
+    var view = window.innerHeight;
+    
+    if(view <700){
+        thresholdValue = 0.2;
+    }else{
+        thresholdValue=0.8;
+    }
     const options = {   
-        threshold:0.5,
-        rootMargin : "-100px"
-    };
+       threshold:thresholdValue,
+       rootMargin: "-25px"
+    
+       
+   };
 
     observer = new IntersectionObserver( function (entries,observer){
         entries.forEach(entry =>{
@@ -121,8 +129,8 @@ function scrollToSection (event){
 // Build menu 
 
 // Scroll to section on link click
-const navigation = document.querySelector("#navbar__list");
-navigation.addEventListener("click",scrollToSection)
+
+navList.addEventListener("click",scrollToSection)
 
 
 // Set sections as active
